@@ -1,0 +1,184 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="gnu emacs">
+<title>Homework 3</title>
+<style type = "text/css">
+<!-- @import "http://www.cs.fsu.edu/~lacher/styles/RCLstyle1.css"; -->
+</style>
+</HEAD>
+<body link="black" vlink="black" alink="#808080">
+
+<!--
+<center>
+<h1><font color=#990000>DRAFT: Open for comment in the discussion forum.</font></h1>
+</center>
+-->
+
+<center>
+<h1>Homework 3: Class ID</h1>
+<em>Classes with Dynamically Allocated Members</em>
+</center>
+
+
+<P>
+<b>Educational Objectives.</b> After successfully completing this assignment,
+the student should be able to accomplish the following:
+</P>
+
+<ul>
+<li>Design a class based on non-language-specific specifications</li>
+<li>Implement a class of your own design</li>
+<li>Implement constructors, copy constructor, destructor, and assignment
+operator for a class that has resource allocation requirements</li>
+<li>Implement Set and Get methods for class data</li>
+<li>Correctly separate class definition and implementation using files</li>
+<li>Create executables of class client programs using makefiles and the Make utility</li>
+<li>Test a class using specs and an existing test platform</li>
+</ul>
+
+<p>
+<strong>Operational Objectives:</strong> Define and implement the class
+<tt>ID</tt> and deliver the code in two files
+<tt>id.h</tt> and <tt>id.cpp</tt> along with a makefile for the supplied test harness.
+</p>
+
+<p><strong>Deliverables:</strong> 
+<tt>id.h</tt>, <tt>id.cpp</tt>, <tt>makefile</tt>
+</P>
+
+<h2>Procedural Requirements:</h2>
+
+<ol type="1">
+
+<li><p>Begin as usual by creating your assignment directory and 
+copying the distribution files for the assignment:
+</p><blockquote><pre>cp ~cop3330p/fall12/hw3/* ~/cop3330/hw3/
+cp ~cop3330p/fall12/area51/ID*.x ~/cop3330/hw3/
+</pre></blockquote><p>
+Then a long listing of your assignment directory should look like this:
+
+</p><blockquote><pre>
+-rw------- 1 xxxxxxxx CS-Class   505 Sep 14 11:45 hw3submit.sh
+-rw------- 1 xxxxxxxx CS-Class 16469 Sep 14 11:46 IDtest1_i.x
+-rw------- 1 xxxxxxxx CS-Class 18188 Sep 14 11:46 IDtest1_s.x
+-rw------- 1 xxxxxxxx CS-Class 13355 Sep 14 11:46 IDtest2_i.x
+-rw------- 1 xxxxxxxx CS-Class 12216 Sep 14 11:46 IDtest2ShallowCopy_i.x
+-rw------- 1 xxxxxxxx CS-Class 13060 Sep 14 11:46 IDtest2ShallowCopy_s.x
+-rw------- 1 xxxxxxxx CS-Class 14392 Sep 14 11:46 IDtest2_s.x
+-rw------- 1 xxxxxxxx CS-Class  2030 Sep 14 11:45 test1.cpp
+-rw------- 1 xxxxxxxx CS-Class  1306 Sep 14 11:45 test2.cpp
+</pre></blockquote><p>
+The executables are for demonstration purposes. You can erase these 
+and get them back by copying again. After invoking "<tt>clean .</tt>" to declutter the
+directory and "<tt>chmod 700 hw3submit.sh</tt>" to set permissions on the submit
+script, a long listing should be:
+</p><blockquote><pre>
+-rwx------ 1 xxxxxxxx CS-Class   505 Sep 14 11:45 hw3submit.sh
+-rw------- 1 xxxxxxxx CS-Class  2030 Sep 14 11:45 test1.cpp
+-rw------- 1 xxxxxxxx CS-Class  1306 Sep 14 11:45 test2.cpp
+</pre></blockquote><p>
+Now continue to the next step:
+
+<li><p>Create a makefile that builds executables <tt>test1.x</tt> and
+<tt>test2.x</tt>. Look at the #include statements in test1.cpp and test2.cpp to
+deduce what the intermediate targets and dependencies should be.</p></li>
+
+<li><p>Design the class ID, placing the definition in file <tt>id.h</tt></p></li>
+
+<li><p>Implement the class ID, placing the class implementation in file
+<tt>id.cpp</tt>. You can test the code for syntax errors with the command "<tt>make
+id.o</tt>" or the command "<tt>co3330 id</tt>".</p></li>
+
+<li><p>Thoroughly test class ID, starting out with the supplied test harnesses in
+file <tt>hw3/test?.cpp</tt> using your makefile to build the executables. (Note
+- you could also use the command line compile scripts "co3330" to create object
+files and then and "g++ -otest1.x id.o test1.o" to create executables, as in
+Homework 1.)</p></li>
+
+<li><p>Turn in  <tt>id.h</tt>, <tt>id.cpp</tt>, and <tt>makefile</tt>
+using the <tt>hw3submit.sh</tt> submit script.
+</p>
+<p>
+<em><b>Warning:</b> Submit scripts do not work on the <tt>program</tt> and
+<tt>linprog</tt> servers. Use <tt>shell.cs.fsu.edu</tt> to submit projects. If you do
+not receive the second confirmation with the contents of your project, there has
+been a malfunction.</em>
+</p></li>
+</ol>
+
+
+
+<h2>Technical Requirements and Specifications</h2>
+
+<ol>
+
+<li><p>The class should implement the following diagram:
+<p>
+<table border=4 cellspacing=0>
+<tr><td valign="top">
+<em>Class Name:</em></td><td><pre>  ID</pre>
+</td></tr>
+<tr><td valign="top">
+<em>Services&nbsp;:</em>&nbsp;
+</td>
+<td>
+<pre>
+  void        SetName ( const char* ) // sets the name field
+  void        SetAge  ( int )         // sets the age field
+  const char* GetName () const        // returns a const pointer to the name field
+  int         GetAge  () const        // returns the age field by value
+</pre>
+</td></tr>
+<tr><td valign="top">
+<em>Properties&nbsp;:</em>&nbsp;
+</td>
+<td>
+<pre>
+  Constructable: objects can be declared as ordinary variables
+  Assignable:    objects can be assigned one to another
+  Passable:      objects can be passed by value to and returned as values from functions&nbsp;&nbsp;
+</pre>
+</td></tr>
+<tr><td valign="top"><em>Private variables:</em></td>
+<td>
+<pre>
+  char * name_  // the name field
+  int    age_   // the age field
+</pre>
+</td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+</p></li>
+
+<li><p>The class should be a proper type, to include default constructor,
+2-argument constructor (that initializes the two data fields), copy constructor,
+assignment operator, and destructor. Note that the default constructor should
+set the name to "#" and the age to -1.
+</p></li>
+
+<li><p>The output operator <tt>operator<< </tt> should be overloaded for the
+type <tt>ID</tt>.
+</p></li>
+
+<li><p>Class ID should pass testing with the supplied <tt>hw3/test?.cpp</tt> with no
+compile or runtime errors and no compiler warnings when the warning flags
+<tt>-W</tt>, <tt>-Wall</tt>, <tt>-Wextra</tt> are set.
+</p></li>
+
+<li><p>Building and running the supplied <tt>hw3/test?.cpp</tt> should result in
+output identical to the supplied executable <tt>area51/IDtest_?.x</tt>
+[? = <tt>i</tt> or <tt>s</tt>] .
+</p></li>
+
+
+
+</ol>
+
+</body>
+</html>
+
+

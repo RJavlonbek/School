@@ -1,0 +1,6 @@
+ IDs after declaration:
+  p1 = John Doe	100
+  p2 = Tony Staple	30
+ IDs after client program changes myName and myAge:
+  p1 = John Doe	100
+  p2 = Tony Staple	30

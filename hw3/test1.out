@@ -1,0 +1,39 @@
+ IDs after declaration:
+  p1 = Chris Smith	100
+  p2 = #	-1
+ IDs after Set:
+  p1 = Copy Checker	10
+  p2 = Assign Checker	20
+ IDs after p3 = CopyCheck(p1):
+  p1 = Copy Checker	10
+  p3 = Copy Checker	10
+ IDs after AssignCheck(p2,p3):
+  p2 = Assign Checker	20
+  p3 = Copy Checker	10
+ IDs after p1 = p2 = p3 = p4:
+  p1 = Transitive Assignment Check	50
+  p2 = Transitive Assignment Check	50
+  p3 = Transitive Assignment Check	50
+  p4 = Transitive Assignment Check	50
+ ID Array after declaration:
+  id[ 0] = #	-1
+  id[ 1] = #	-1
+  id[ 2] = #	-1
+  id[ 3] = #	-1
+  id[ 4] = #	-1
+  id[ 5] = #	-1
+  id[ 6] = #	-1
+  id[ 7] = #	-1
+  id[ 8] = #	-1
+  id[ 9] = #	-1
+ ID Array after Set:
+  id[ 0] = A. B. Student	17
+  id[ 1] = A. B. Student	18
+  id[ 2] = A. B. Student	19
+  id[ 3] = A. B. Student	20
+  id[ 4] = A. B. Student	21
+  id[ 5] = A. B. Student	22
+  id[ 6] = A. B. Student	23
+  id[ 7] = A. B. Student	24
+  id[ 8] = A. B. Student	25
+  id[ 9] = A. B. Student	26
