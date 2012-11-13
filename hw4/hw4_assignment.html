@@ -1,0 +1,228 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="gnu emacs">
+<title>Homework 4</title>
+
+</HEAD>
+<body link="black" vlink="black" alink="#808080">
+
+<!--
+<center>
+<h1><font color=#990000>DRAFT: Open for comment in the discussion forum.</font></h1>
+</center>
+-->
+
+<center>
+<h1>Homework 4: UIntSet</h1>
+<em>Sets as Application of BitVector</em>
+</center>
+
+<P>
+<b>Educational Objectives.</b> After successfully completing this assignment,
+the student should be able to accomplish the following:
+</P>
+
+<ul>
+<li>Design a class based on non-language-specific specifications</li>
+<li>Implement a class of your own design</li>
+<li>Implement constructors, copy constructor, destructor, and assignment
+operator for a class that has resource allocation requirements</li>
+<li>Global operators for a class</li>
+<li>Correctly separate class definition and implementation using files</li>
+<li>Create executables of class client programs using makefiles and the Make utility</li>
+<li>Test a class using specs and an existing test platform</li>
+<li>Use <tt>fsu::BitVector</tt> in designing set classes</li>
+</ul>
+
+<p>
+<strong>Operational Objectives:</strong> Define and implement the class
+<tt>UIntSet</tt> and deliver the code in two files
+<tt>uintset.h</tt> and <tt>uintset.cpp</tt> along with a makefile for the supplied test harness.
+</p>
+
+<p><strong>Deliverables:</strong> 
+<tt>uintset.h</tt>, <tt>uintset.cpp</tt>, <tt>makefile</tt>
+</P>
+
+<h2>Procedural Requirements:</h2>
+
+<ol type="1">
+
+<li><p>Design the class UIntSet</p></li>
+
+<li><p>Implement the class UIntSet with the class definition in file <tt>uintset.h</tt>
+and the class implementation in file <tt>uintset.cpp</tt></p></li>
+
+<li><p>Thoroughly test class UIntSet, starting out with the supplied test harness in
+file <tt>hw4/test.cpp</tt> using command line compile</p></li>
+
+<li><p>Write a makefile that builds <tt>test.x</tt> with the "in lieu of
+makefile" include statement commented out or removed</p></li>
+
+<li><p>Test the executable again, and refine your work to withstand testing.<p></li>
+
+<li><p>Turn in  <tt>uintset.h</tt>, <tt>uintset.cpp</tt>, and <tt>makefile</tt>
+using the <tt>hw4submit.sh</tt> submit script.
+</p>
+<p>
+<em><b>Warning:</b> Submit scripts do not work on the <tt>program</tt> and
+<tt>linprog</tt> servers. Use <tt>shell.cs.fsu.edu</tt> to submit projects. If you do
+not receive the second confirmation with the contents of your project, there has
+been a malfunction.</em>
+</p></li>
+</ol>
+
+
+
+<h2>Technical Requirements and Specifications</h2>
+
+<ol>
+
+<li><p>The class should implement the following diagram:
+<p>
+<table border=4 cellspacing=0>
+<tr><td valign="top">
+<em>Class Name:</em></td><td><pre>  UIntSet</pre>
+</td></tr>
+<tr><td valign="top">
+<em>Services&nbsp;:</em>&nbsp;
+</td>
+<td>
+<pre>
+  void        Insert   ( unsigned long n )        // inserts n into set
+  void        Remove   ( unsigned long n )        // removes n from set
+  void        Clear    ()                         // makes set empty
+  bool        Member   ( unsigned long n ) const  // returns true iff n is in set
+
+  bool        Empty    () const;   // true iff set is empty
+  size_t      Size     () const;   // returns number of elements in set
+  size_t      Range    () const;   // returns upper bound of range/universe [0,ub)
+
+  UIntSet& operator =  (const UIntSet& s);  // set = s (assignment operator)
+  UIntSet& operator += (const UIntSet& s);  // set = set union s
+  UIntSet& operator *= (const UIntSet& s);  // set = set intersection s
+  UIntSet& operator -= (const UIntSet& s);  // set = set difference s
+</pre>
+</td></tr>
+<tr><td valign="top">
+<em>Developer Services&nbsp;:</em>&nbsp;
+</td>
+<td>
+<pre>
+  void        Dump     ( std::ostream& os ) const;
+  // used in development &amp; testing; displays underlying bitvector state
+</pre>
+</td></tr>
+<tr><td valign="top">
+<em>Properties&nbsp;:</em>&nbsp;
+</td>
+<td>
+<pre>
+  Constructable: objects can be declared as ordinary variables, max size may be specified
+  Assignable:    objects can be assigned one to another
+  Passable:      objects can be passed by value to and returned as values from functions&nbsp;&nbsp;
+</pre>
+</td></tr>
+<tr><td valign="top"><em>Private variables:</em></td>
+<td>
+<pre>
+  fsu::BitVector bv_;    // bit vector representing set
+</pre>
+</td></tr>
+<tr><td valign="top"><em>Global operators:&nbsp;</em></td>
+<td>
+<pre>
+  UIntSet operator +  (const UIntSet& s1, const UIntSet& s2);  // returns s1 union s2
+  UIntSet operator *  (const UIntSet& s1, const UIntSet& s2);  // returns s1 intersection s2 
+  UIntSet operator -  (const UIntSet& s1, const UIntSet& s2);  // returns s1 difference s2
+  bool    operator == (const UIntSet& s1, const UIntSet& s2);  // true iff s1 and s2 are equal as sets&nbsp;&nbsp;&nbsp;
+  bool    operator != (const UIntSet& s1, const UIntSet& s2);  // true iff s1 and s2 are not equal
+  std::ostream& operator << (std::ostream& os, const UIntSet& s); // output operator
+</pre>
+</td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+</p></li>
+
+<li><p>The class should be a proper type, to include default and 1-argument constructor,
+copy constructor, assignment operator, and destructor. The constructor argument
+sets the maximum size of unsigned integers that can belong to the set. Default
+maximum element size is 64.
+</p></li>
+
+<li><p>The output operator <tt>operator<< </tt> should be overloaded for the
+type <tt>UIntSet</tt>. Output should be "<tt>{ 0 6 12 18 }</tt>" for the set
+containing elements 0, 6, 12, 18.
+</p></li>
+
+<li><p>The <tt>Dump</tt> method is intended for use by the development and
+testing teams. <tt>Dump(os)</tt> should display the current state of the
+underlying BitVector object. The display would be 
+</p><blockquote><pre>10000010000010000010000000000000
+01234567890123456789012345678901
+</pre></blockquote><p>
+for the set <tt>{ 0 6 12 18 }</tt>.
+</p></li>
+
+<li><p>Global binary operators <tt>operator+</tt>, <tt>operator*</tt>,
+ <tt>operator-</tt> should be overloaded for the
+type <tt>UIntSet</tt>. The syntax and semantics of these operators are as
+ follows:
+</p><blockquote><pre>
+UIntSet(200) s1, s2, s3; // three empty sets with range [0,1,2,...,200)
+s2.Insert(2); s2.Insert(3); s2.Insert(4);
+s3.Insert(2); s3.Insert(4); s3.Insert(6);
+std::cout << s2;  // prints { 2 3 4 }
+s1 = s2 + s3; // s1 is the set union of s2 and s3
+std::cout << s1;  // prints { 2 3 4 6 }
+s1 = s2 * s3; // s1 is the set intersection of s2 and s3
+std::cout << s1;  // prints { 2 4 }
+s1 = s2 - s3; // s1 is the set difference of s2 and s3
+std::cout << s1;  // prints { 3 }
+</pre></blockquote><p>
+
+</p></li>
+
+<li><p>UIntSet should pass testing with the supplied <tt>hw4/test.cpp</tt> with no
+compile or runtime errors and no compiler warnings when the warning flags
+<tt>-W</tt>, <tt>-Wall</tt>, <tt>-Wextra</tt> are set.
+</p></li>
+
+<li><p>Building and running the supplied <tt>hw4/test.cpp</tt> should result in
+output identical to the supplied executable <tt>area51/settest_?.x</tt>
+[? = <tt>i</tt> or <tt>s</tt>] .
+</p></li>
+
+
+
+</ol>
+
+<p><strong>Hints</strong></p>
+
+<ul>
+<li>Note that BitVector has a Dump method.</li>
+<li>Note that BitVector has a Size method that returns the number of bits.
+<li>The global set operators (<tt>+,*,-</tt>) can be implemented using the corresponding
+member operators, like this:
+<blockquote><pre>
+{
+  UIntSet s(s1);
+  s x= s2;  // x = +,*, or -
+  return s;
+}
+</pre></blockquote>
+</li>
+<li>The global operator (<tt>==</tt>) require a loop of element tests.</li>
+<li>The global operator (<tt>!=</tt>) should be implemented with a
+call to <tt>==</tt>.</li>
+<li>The gobal operator <tt>&lt;&lt;</tt> requires a loop of element tests.</li>
+</ul>
+
+</body>
+</html>
+
+
