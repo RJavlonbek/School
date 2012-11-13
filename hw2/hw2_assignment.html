@@ -1,0 +1,290 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="gnu emacs">
+<title>Homework 2: Stats</title>
+<style type = "text/css">
+<!-- @import "http://www.cs.fsu.edu/~lacher/styles/RCLstyle1.css"; -->
+</style>
+</HEAD>
+<body link="black" vlink="black" alink="#808080">
+
+<!--
+<center>
+<h1><font color=#990000>DRAFT: Currently under revision. The general thrust will
+be the same, but details may be changed. If you start early, you may need to
+revise your code in superficial ways.</font></h1>
+</center>
+-->
+
+<center>
+<h1>Homework 2: Stats</h1>
+<em>Finding the mean and median of numerical data</em>
+</center>
+
+<P>
+<b>Educational Objectives:</b> After successfully completing this assignment,
+the student should be able to accomplish the following:
+</P>
+
+<ul>
+<li>Use a loop structure to read user input of unknown size through <tt>std::cin</tt> and store it in an array.</li>
+<li>Use conditional branching to selectively perform computational tasks.</li>
+<li>Declare (prototype) and define (implement) functions.</li>
+<li>Declare and define functions with arguments of various types, including pointers, references,
+const pointers, and const references.</li>
+<li>Call functions, making appropriate use of the function arguments and their types.</li>
+<li>Make decisions as to appropriate function call parameter type, from among:
+value, reference, const reference, pointer, and const pointer.</li>
+<li>Compile and run a C++ program in the Unix/Linux environment using <tt>g++</tt>.</li>
+</ul>
+
+<p>
+<strong>Operational Objectives:</strong>
+Create a project that computes the mean and median of a sequence of
+integers received via standard input.
+</p>
+
+<p><strong>Deliverables:</strong> 
+Four files: <tt>stats.h</tt>, <tt>stats.cpp</tt>, <tt>main.cpp</tt>, <tt>makefile</tt>.
+Note that these files constitute a self-contained project.</P>
+
+<h2>Background</h2>
+
+<p>
+Given a finite collection of <i>n</i> numbers:
+</p>
+
+<ol type="a">
+<li>The  <em>mean</em> is the sum of the numbers divided by <i>n</i>, and</li>
+<li>The <em>median</em> is the middle value (in case <i>n</i> is odd) or the
+average of the two middle values (in case <i>n</i> is even).</li>
+</ol>
+
+<p>
+Note that to find the median of a collection of data, it is convenient to first
+<em>sort</em> the data, that is, put the data in increasing (or non-decreasing)
+order. Then the median is just the middle datum in the sorted sequence (or the
+average of the two middle data, if there are an even number).
+</p>
+
+<p> One of the simplest sort algorithms is called <em>Selection Sort</em>, which operates
+on an array of elements and has a computation which
+can be described in one sentence: <i>For each element of the
+array, find the smallest element with equal or higher index in the array and swap these two
+elements.</i> Here is a "pseudocode" description of the algorithm:
+</p>  
+<blockquote><pre>
+for i in [0...n)       // for each element of array A
+  k = i                // find the smallest element following it
+  for j in [i+1...n)
+    if A[j] < A[k]
+      k = j
+    endif
+  endfor               // now A[k] is the smallest element following A[i]
+  swap the values in A[i] and A[k]
+endfor
+</pre></blockquote><p>
+
+(You could test whether <tt>A[k] < A[i]</tt> before the swap, but it is not clear
+this would speed up the process - swapping may be faster than testing.)
+</p>
+
+<h2>Procedural Requirements:</h2>
+
+<ol type="1">
+
+<li><p> Create and work within a
+separate subdirectory <tt>cop3330/hw2</tt>. 
+Review the COP 3330 rules found in Introduction/Work Rules. 
+</p></li>
+
+<li><p>
+Copy these files
+</p><blockquote><pre>
+LIB/hw2/makefile
+LIB/hw2/hw2submit.sh
+</pre></blockquote><p>
+from the course distribution library into your project directory.
+</p></li>
+
+<li><p>
+Create three more files
+</p><blockquote><pre>
+stats.h
+stats.cpp
+main.cpp
+</pre></blockquote><p>
+complying with the Technical Requirements and Specifications stated below.
+</p></li>
+
+
+<li><p>
+Turn in four files <tt>stats.h</tt>, <tt>stats.cpp</tt>, <tt>main.cpp</tt>,
+and <tt>makefile</tt> using the <tt>hw2submit.sh</tt> submit script.
+</p>
+<p>
+<em><b>Warning:</b> Submit scripts do not work on the <tt>program</tt> and
+<tt>linprog</tt> servers. Use <tt>shell.cs.fsu.edu</tt> to submit projects. If you do
+not receive the second confirmation with the contents of your project, there has
+been a malfunction.</em>
+</p></li>
+
+</ol>
+
+<h2>Technical Requirements and Specifications</h2>
+<ol>
+
+<li><p>
+The project should compile error- and warning-free on <tt>linprog</tt> with the command
+<tt>make stats.x</tt>.
+</p></li>
+
+<li><p> The number of integers input by the user is not known in advance, except
+that it will not exceed 100. Numbers are input through standard input, either
+from keyboard or file re-direct. The program should read numbers until a
+non-digit or end-of-file is encountered or 100 numbers have been read.
+</p></li>
+
+<li><p>
+Once the input numbers have been read, the program should calculate the mean and
+median and then report these values to standard output. 
+</p></li>
+
+<li><p>
+The source code should be structured as follows:
+<ol type="a">
+<li>Implement separate functions with the following prototypes:
+<pre>float Mean   (const int* array, size_t size); // calculates mean of data in array
+float Median (int* array, size_t size);       // calculates median of data in array
+void  Swap   (int& x, int& y);                // interchanges values of x and y
+void  Sort   (int* array, size_t size);       // sorts the data in array
+</pre>
+</li>
+
+<li>I/O is handled by function <tt>main()</tt>; no other functions should do any
+I/O</li>
+<li>Function <tt>main()</tt> calls <tt>Mean()</tt> and <tt>Median()</tt></li>
+<li>Function <tt>Median()</tt> calls <tt>Sort()</tt></li>
+<li>Function <tt>Sort()</tt> calls <tt>Swap()</tt></li>
+</ol>
+</p></li>
+
+<li><p>
+The source code should be organized as follows:
+<ol type="a">
+<li>Prototypes for <tt>Mean</tt>, <tt>Median</tt>, <tt>Sort</tt>, and
+<tt>Swap</tt> should be in file <tt>stats.h</tt></li>
+<li>Implementations for <tt>Mean</tt>, <tt>Median</tt>, <tt>Sort</tt>, and
+<tt>Swap</tt> should be in file <tt>stats.cpp</tt></li>
+<li>Function <tt>main</tt> should be in file <tt>main.cpp</tt></li>
+</ol>
+</p></li>
+
+<li><p>
+The <tt>Sort()</tt> function should implement the Selection Sort
+algorithm.
+</li></p>
+
+<li><p>
+When in doubt, your program should behave like the distributed executable
+examples in <tt>stats_i.x</tt> and <tt>stats_s.x</tt> in <tt>area51</tt>. Identical behavior is not required, but the
+general I/O behavior should be the same. In particular, the data input loop
+should not be interupted by prompts for a next datum - this will make file
+redirect cumbersome. Just ask for the data one time, then read until a non-digit
+or end of file is encountered.
+</li></p>
+
+</ol>
+
+<h2>Hints</h2>
+
+<ul>
+
+<li>
+Sample executables are distributed in <tt>[LIB]/area51</tt>. These are named
+<tt>stats_i.x</tt> and <tt>stats_s.x</tt>. The suffixes indicate which of the
+two architectures the executable is compiled on: <tt>*_i.x</tt> runs on
+Intel/Linux and <tt>*_s.x</tt> runs on Sun/Unix. 
+</li>
+
+<li>
+To run a sample executable, follow these steps: (1) Decide which architecture
+you want to use. The <tt>program</tt> machines are 32-bit Sun architecture running
+Sun's version of Unix, and the <tt>linprog</tt> machines are Intel 64-bit
+architecture running Linux. (2) Copy the appropriate executable into your space
+where you want to run it. For example, if you are logged in to <tt>program</tt>
+enter the command "<tt>cp [LIB]/area51/stats_s.x .</tt>". (3) Change permissions
+to executable: "<tt>chmod 700 stats_s.x</tt>". (4) Execute by entering the name
+of the executable. If you want to run it on a data file "<tt>data1</tt>", use
+input redirect as in: "<tt>stats_s.x < data1</tt>". If you want the output to go to
+another file, use output redirect: "<tt>stats_s.x < data1 > data1.out</tt>".
+</li>
+
+<li>
+Two test files are distributed in <tt>[LIB]/hw2</tt>.
+To run the sample executable on a file, say <tt>data1</tt>, first make sure you
+have an executable copy of the program and the data file, then enter the
+command:<br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stats.x &lt; data1</tt><br>
+This is a Unix/Linux operation that redirects the contents of <tt>data1</tt>
+into standard input for <tt>stats.x</tt>. Using &gt; redirects program output. For
+example, the command:<br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stats.x &lt; data1 > data1.out</tt><br>
+sends the contents of <tt>data1</tt> to standard input and then sends the
+program output into the file <tt>data1.out</tt>. These are very handy operations
+for testing programs.
+</li>
+
+<li>
+It is sometimes simpler to develop the code in a single file (such as
+<tt>project.cpp</tt>) that can be edited in one window and test-compiled with a
+single command (such as <tt>g++&nbsp;-Wall&nbsp;-Wextra&nbsp;-ostats.x&nbsp;project.cpp</tt>) and
+split the file up into the deliverables after the initial round of testing and
+debugging. </li>
+
+<li>
+Note that the array in which input is stored is passed to the functions as a
+pointer. In the case of <tt>Mean()</tt>, this pointer is <tt>const</tt>,
+indicating that the elements of the array may not be changed by the
+call. However in the case of <tt>Median()</tt>, the array element values are
+allowed to change. These values are in fact changed by the call to
+<tt>Sort()</tt>.
+</li>
+
+<li>The function <tt>Sort()</tt> operates on the array input as a pointer. When
+the function returns, the values of the array should be in increasing order.</li>
+
+<li>The selection sort algorithm requires a nested pair of <tt>for</tt> loops
+(one inside the other).</li>
+
+<li>The function <tt>Swap()</tt> encapsulates the chore of swapping two values.
+Your sort implementation should call <tt>Swap</tt> whever two values need to
+be swapped. Note that the two parameters for <tt>Swap</tt> are passed by
+reference, so that the function acts on the values in the <i>calling</i>
+routine.
+</li>
+
+<li>Sorting the data is essential to calculate the median: when in an array that
+is sorted, the middle (two) values are those contained in the middle (two) indices
+of the array. </li>
+
+<li>
+The middle index
+of an array of <tt>n</tt> elements, when <tt>n</tt> is odd, is
+[(<tt>n-1)/2]</tt>. The middle two indices, when <tt>n</tt> is even, are
+<tt>[n/2 - 1]</tt> and <tt>[n/2]</tt>.
+</li>
+
+<li>Be careful when subtracting 1 from an unsigned integer type such as <tt>size_t</tt>.</li>
+
+<li>Look at the code examples in <a
+href="http://www.cs.fsu.edu/~lacher/courses/COP3330/lectures/control/toc.html" target="_blank">Chapter 3</a> of the lecture notes to find simple
+ways to structure your main I/O loop.</li>
+
+</ul>
+
+</body>
+</html>
+
+

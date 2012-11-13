@@ -1,0 +1,5 @@
+Enter integers ('x' to quit): 
+Data as entered:  1 7 34 8 2 1 78 3
+Mean:   16.75
+Median: 5
+Data after sort:  1 1 2 3 7 8 34 78
