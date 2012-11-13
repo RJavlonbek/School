@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/ingameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ingame_title"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/footerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/footer"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/scoreOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footerTextView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/temp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/rockButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ingameTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:onClick="playRock"
+        android:text="@string/rock" />
+
+    <Button
+        android:id="@+id/paperButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rockButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="playPaper"
+        android:text="@string/paper" />
+
+    <Button
+        android:id="@+id/scissorsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paperButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:onClick="playScissors"
+        android:text="@string/scissors" />
+
+    <TextView
+        android:id="@+id/playerPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_alignRight="@+id/computerPlayed"
+        android:layout_below="@+id/scissorsButton"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="35dp"
+        android:text="@string/playerPlayed"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/computerPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_toLeftOf="@layout/activity_main"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/playerPlayed"
+        android:text="@string/computerPlayed"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/playerAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/playerPlayed"
+        android:layout_alignBottom="@+id/playerPlayed"
+        android:layout_toRightOf="@+id/scissorsButton"
+        android:text="@string/temp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/winner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/computerPlayed"
+        android:layout_below="@+id/computerPlayed"
+        android:layout_marginLeft="20dp"
+        android:text="@string/winner"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/computerAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/winner"
+        android:layout_toRightOf="@+id/scissorsButton"
+        android:text="@string/temp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/winnerAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/winner"
+        android:layout_alignBottom="@+id/winner"
+        android:layout_alignLeft="@+id/computerAnswer"
+        android:text="@string/temp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

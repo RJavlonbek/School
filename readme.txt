@@ -5,6 +5,9 @@ The quality of code varies depending upon the particular courses expectation and
 They range in difficulty, including some easy and simple assignments.
 
 
+I personally enjoyed the Android work the most.
+
+
 
 
 

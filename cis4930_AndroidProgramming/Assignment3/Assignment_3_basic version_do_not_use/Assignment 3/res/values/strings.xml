@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">Assignment 3</string>
+    <string name="title_activity_main">CIS 4930 - Assignment 3</string>
+    <string name="footer">Adam Gorman 2012</string>
+    <string name="rock">Rock</string>
+    <string name="paper">Paper</string>
+    <string name="scissors">Scissors</string>
+    
+    <string name="temp">Temp</string>
+    
+    <string name="playerPlayed">Player Played: </string>
+    
+     <string name="computerPlayed">Computerr Played: </string>
+     <string name="winner">Winner: </string>
+    
+    <string name="ingame_title">Rock, Paper, Scissors Game</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>

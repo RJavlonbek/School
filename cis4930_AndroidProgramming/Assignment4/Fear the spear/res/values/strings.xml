@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">Fear the spear</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Fear The Spear!</string>
+    <string name="songDefault">song</string>
+    <string name="temp">temp</string>
+    <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
+    <string name="play">Play</string>
+    
+    <dimen name="text_size_large">14dp</dimen>
+    <color name="grey">#dddddd</color>
+    <color name="maroon">#C32148</color>
+    <color name="white">#000000</color>
+    <color name="black">#ffffff</color>
+    
+</resources>

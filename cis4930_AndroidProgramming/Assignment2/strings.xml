@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Assignment 2</string>
+    <string name="title_activity_main">CIS 4930 - Assignment 2</string>
+    <string name="show_nole">Show Me A Nole!</string>
+    <string name="nole_description">It is a Seminole!!</string>
+    <string name="show_gator">Show Me A Gator!!</string>
+    <string name="menu_settings">Settings</string>
+    <dimen name="mySmallFontSize">12dp</dimen>
+    <string name="MadeBy">Created by: Adam Gorman</string>
+    <string name="buttonCount">Button Count: 0</string>
+</resources>

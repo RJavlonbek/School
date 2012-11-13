@@ -1,0 +1,40 @@
+<resources>
+
+    <string name="app_name">Assignment 3</string>
+    <string name="title_activity_main">CIS 4930 - Assignment 3</string>
+    <string name="desktop_name">RPS Lizard Spock</string>
+    <string name="footer">Adam Gorman 2012</string>
+    <string name="rock">Rock</string>
+    <string name="paper">Paper</string>
+    <string name="scissors">Scissors</string>
+    <string name="temp">Begin play</string>
+    <string name="playerPlayed">Player Played: </string>
+    <string name="computerPlayed">Computerr Played: </string>
+    <string name="winner">Winner: </string>
+    <string name="ingame_title">Rock, Paper, Scissors, Lizard, Spock Game</string>
+    <string name="menu_settings">Settings</string>
+    <string name="buttonDefault">Click me!</string>
+    <string name="versus">Vs.</string>
+    <string name="you">You</string>
+    <string name="cpu">Cpu</string>
+    <string name="rules">Rules</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_rules">RulesActivity</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string-array name="end_game_responses">
+        <item>Rock Crushes Scissors</item> 
+		<item>Rock Crushes Lizard</item>
+		<item>Paper Covers Rock</item>
+		<item>Paper Disproves Spock</item>
+		<item>Scissors Cuts Paper</item>
+		<item>Scissors Decapitates Lizard</item>
+		<item>Lizard Poisons Spock</item>
+		<item>Lizard Eats Paper</item>
+		<item>Spock Smashes Scissors</item>
+		<item>Spock Vaporizes Rock</item>
+	</string-array>
+    
+    <color name="brown">#b8ae9c</color>
+    <color name="orange">#FF530D</color>
+    
+</resources>
